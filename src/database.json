@@ -1,0 +1,134 @@
+{
+  "schema": [
+    {
+      "Account": {
+        "Columns": {
+          "email_address": "Text",
+          "password": "Text"
+        },
+        "Primary_Key": ["email_address"],
+      }
+    },
+    {
+      "Tokens": {
+        "Columns": {
+          "email_address": "Text",
+          "token": "Text"
+        },
+        "Primary_Key": ["email_address","token"],
+        "Constraints": [{
+          "Parent": "Account.email_address",
+          "Child" : "Tokens.email_address"
+        }]
+      }
+    },
+    {
+      "Channels": {
+        "Columns": {
+          "name": "Text",
+          "descriminator": "Int",
+
+          "email_address": "Text",
+
+          "display_name": "Text",
+          "channel_bio": "Text",
+          "badges": "Text[]",
+        },
+        "Primary_Key": ["name", "descriminator"],
+        "Constraints": [{
+          "Parent": "Account.email_address",
+          "Child": "Channels.email_address"
+        }]
+
+      }
+    },
+    {
+      "Permissions": {
+        "Columns": {
+          "name": "Text",
+          "descriminator": "Int",
+
+          "disabled": "Boolean",
+          "canPost": "Boolean",
+          "canPostVideos": "Boolean",
+          "strikes": "Int",
+
+          "role": "Text"
+        },
+        "Primary_Key": ["name","descriminator"],
+        "Constraints": [{
+          "Parent": "Channels.name",
+          "Child": "Permissions.name"
+        },
+        {
+          "Parent": "Channels.descriminator",
+          "Child": "Permissions.name"
+        }]
+      }
+    },
+    {
+      "Following": {
+        "Columns": {
+          "follower_name": "Text",
+          "follower_descriminator": "Int",
+
+          "followee_name": "Text",
+          "followee_descriminator": "Int"
+        },
+        "Primary_Key_Key": ["follower_name","follower_descriminator", "followee_name", "followee_descriminator"],
+        "Constraints": [{
+          "Parent": "Channels.name",
+          "Child": "Following.follower_name"
+        },
+        {
+          "Parent": "Channels.descriminator",
+          "Child": "Following.follower_descriminator"
+        },
+        {
+          "Parent": "Channels.name",
+          "Child": "Following.followee_name"
+        },
+        {
+          "Parent": "Channels.descriminator",
+          "Child": "Following.followee_descriminator"
+        }]
+      }
+    },
+    {
+      "Posts": {
+        "Columns": {
+          "postid":"Text",
+
+          "name": "Text",
+          "descriminator": "Int",
+
+          "post_type": "String",
+
+          "content": "Text",
+          "tags": "Text[]",
+
+          "parent_id": "Text"
+        },
+        "Primary_Key": ["postid"],
+        "Constraints": [{
+          "Parent": "Channels.name",
+          "Child": "Posts.name"
+        },
+        {
+          "Parent": "Channels.descriminator",
+          "Child": "Posts.descriminator",
+        },
+        {
+          "Parent": "Posts.postid",
+          "Child": "Posts.parent_id"
+        }]
+      }
+    }
+  ],
+  "users": {
+
+  },
+  "procedures": {
+
+  }
+}
