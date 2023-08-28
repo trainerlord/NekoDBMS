@@ -6,7 +6,7 @@
           "email_address": "Text",
           "password": "Text"
         },
-        "Primary_Key": ["email_address"],
+        "Primary_Key": ["email_address"]
       }
     },
     {
@@ -32,7 +32,7 @@
 
           "display_name": "Text",
           "channel_bio": "Text",
-          "badges": "Text[]",
+          "badges": "Text[]"
         },
         "Primary_Key": ["name", "descriminator"],
         "Constraints": [{
@@ -116,7 +116,7 @@
         },
         {
           "Parent": "Channels.descriminator",
-          "Child": "Posts.descriminator",
+          "Child": "Posts.descriminator"
         },
         {
           "Parent": "Posts.postid",
