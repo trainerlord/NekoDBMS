@@ -75,7 +75,7 @@
           "followee_name": "Text",
           "followee_descriminator": "Int"
         },
-        "Primary_Key_Key": ["follower_name","follower_descriminator", "followee_name", "followee_descriminator"],
+        "Primary_Key": ["follower_name","follower_descriminator", "followee_name", "followee_descriminator"],
         "Constraints": [{
           "Parent": "Channels.name",
           "Child": "Following.follower_name"
