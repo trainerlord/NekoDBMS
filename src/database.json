@@ -57,12 +57,8 @@
         },
         "Primary_Key": ["name","descriminator"],
         "Constraints": [{
-          "Parent": "Channels.name",
-          "Child": "Permissions.name"
-        },
-        {
-          "Parent": "Channels.descriminator",
-          "Child": "Permissions.name"
+          "Parent": "Channels.name, descriminator",
+          "Child": "Permissions.name, descriminator"
         }]
       }
     },
@@ -77,20 +73,12 @@
         },
         "Primary_Key": ["follower_name","follower_descriminator", "followee_name", "followee_descriminator"],
         "Constraints": [{
-          "Parent": "Channels.name",
-          "Child": "Following.follower_name"
+          "Parent": "Channels.name, descriminator",
+          "Child": "Following.follower_name, follower_descriminator"
         },
         {
-          "Parent": "Channels.descriminator",
-          "Child": "Following.follower_descriminator"
-        },
-        {
-          "Parent": "Channels.name",
-          "Child": "Following.followee_name"
-        },
-        {
-          "Parent": "Channels.descriminator",
-          "Child": "Following.followee_descriminator"
+          "Parent": "Channels.name, descriminator",
+          "Child": "Following.followee_name, followee_descriminator"
         }]
       }
     },
@@ -102,7 +90,7 @@
           "name": "Text",
           "descriminator": "Int",
 
-          "post_type": "String",
+          "post_type": "Text",
 
           "content": "Text",
           "tags": "Text[]",
@@ -111,12 +99,8 @@
         },
         "Primary_Key": ["postid"],
         "Constraints": [{
-          "Parent": "Channels.name",
-          "Child": "Posts.name"
-        },
-        {
-          "Parent": "Channels.descriminator",
-          "Child": "Posts.descriminator"
+          "Parent": "Channels.name, descriminator",
+          "Child": "Posts.name, descriminator"
         },
         {
           "Parent": "Posts.postid",
