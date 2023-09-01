@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc ./src/index.ts && node ./src/index.js"
+    "start": "tsc ./src/index.ts && node ./src/index.js && tsc --build --clean"
   },
   "repository": {
     "type": "git",
