@@ -12,17 +12,24 @@ const DATABASE_NAME = "testing"
 async function main() {
   //console.log("Test");
 
-  //Read JSON
-  //
-  const json = parseJson(DATABASE_NAME, "./src/database.json");
+  var args = process.argv.slice(2);
 
-  let sql:string[] = await createDatabaseCommands(DATABASE_NAME,json);
+  //console.log(args)
+  let json: any
+  try {
+  json = parseJson(args[0], args[1]);
+  } catch {
+    console.log("Usage: database-builder <Database Name> <Database Schema Json>")
+    process.exit(0)
+  }
 
-  sql = sql.concat(createApplicationUserCommands(DATABASE_NAME,json))
+  let sql:string[] = await createDatabaseCommands(args[0],json);
 
-  sql = sql.concat(createStoredProcedures(DATABASE_NAME, json))
+  sql = sql.concat(createApplicationUserCommands(args[0],json))
+
+  sql = sql.concat(createStoredProcedures(args[0], json))
   //console.log(sql)
-  await executeCommands(DATABASE_NAME, sql);
+  await executeCommands(args[0], sql);
 }
 
 main();
