@@ -3,4 +3,4 @@ project(NekoDBMS)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(NekoDBMS)
+add_executable(NekoDBMS src/main.cpp)
