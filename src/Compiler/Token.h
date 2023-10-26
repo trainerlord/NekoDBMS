@@ -6,11 +6,33 @@
 #define NEKODBMS_TOKEN_H
 
 
+#include <string>
 
-class Token {
-
+enum TokenType {
+    CreateDatabase,
+    CreateTable,
+    SetPrimaryKey,
+    SetForeignKey,
+    SetNull,
+    String,
+    Integer,
+    Boolean,
+    End,
 };
 
+class Token {
+    TokenType type;
+    std::string value;
+
+public:
+    Token(TokenType type, std::string value);
+
+    TokenType getType();
+    std::string getValue();
+
+    std::string toString();
+
+};
 
 
 #endif //NEKODBMS_TOKEN_H
