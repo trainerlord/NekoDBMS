@@ -1,6 +1,9 @@
 /
+/cmake-build-debug
+/.idea
 !/src
 !/CMakeLists.txt
 !/notepad.md
 !/example.dbms
 !/test
+!/.gitlab-ci.yml

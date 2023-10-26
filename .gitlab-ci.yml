@@ -1,0 +1,19 @@
+stages:
+  - test
+
+image: archlinux:latest
+
+before_script:
+  - pacman -Sy
+  - pacman -S --noconfirm cmake curl make gcc
+  - mkdir .build
+  - cd .build
+  - cmake .. -DCMAKE_BUILD_TYPE=Debug -G "Unix Makefiles"
+  - make all
+  - cd ../
+
+test-neko-dbms:
+  stage : test
+  script:
+    - cd .build
+    - ./NekoDBMSTest
