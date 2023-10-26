@@ -31,7 +31,7 @@ std::vector<Token> Lexer::lexFile() {
                 //Source Code Format Error
                 throw std::invalid_argument("Invaild Source Code");
             }
-            instructions.push_back(Token(CreateDatabase,text.at(currentWord + 1)));
+            instructions.push_back(Token(CreateDatabase,{text.at(currentWord + 1)}));
             currentWord += 2;
             continue;
         }
@@ -41,13 +41,13 @@ std::vector<Token> Lexer::lexFile() {
                 //Source Code Format Error
                 throw std::invalid_argument("Invaild Source Code");
             }
-            instructions.emplace_back(CreateTable,text.at(currentWord + 1));
+            instructions.push_back(Token(CreateTable,{text.at(currentWord + 1)}));
             currentWord += 2;
             continue;
         }
 
         if (this->text.at(currentWord) == "}") {
-            instructions.emplace_back(End,"");
+            instructions.push_back(Token(End,{}));
             continue;
         }
 
@@ -83,19 +83,19 @@ std::vector<Token> Lexer::lexFile() {
             //Handle Every Other Keywords
             for(std::string keyword : keywords) {
                 if (keyword == "@Primary") {
-                    instructions.emplace_back(SetPrimaryKey, attribute);
+                    instructions.push_back(Token(SetPrimaryKey, {attribute}));
                     continue;
                 }
                 if (keyword == "@String") {
-                    instructions.emplace_back(String, attribute);
+                    instructions.push_back(Token(String, {attribute}));
                     continue;
                 }
                 if (keyword == "@Integer") {
-                    instructions.emplace_back(Integer, attribute);
+                    instructions.push_back(Token(Integer, {attribute}));
                     continue;
                 }
                 if (keyword == "@Boolean") {
-                    instructions.emplace_back(Boolean, attribute);
+                    instructions.push_back(Token(Boolean, {attribute}));
                     continue;
                 }
                 if (keyword.starts_with("@Depends")) {
@@ -104,15 +104,23 @@ std::vector<Token> Lexer::lexFile() {
                     unsigned last = keyword.find(')');
                     std::string args = keyword.substr (first,last-first);
 
-                    std::stringstream attributeArg;
-                    attributeArg << attribute << ",";
-                    attributeArg << args;
+                    std::stringstream ss( "1,1,1,1, or something else ,1,1,1,0" );
+                    std::vector<std::string> result;
 
-                    instructions.emplace_back(SetForeignKey, attributeArg.str());
+                    result.push_back(attribute);
+                    while( ss.good() )
+                    {
+                        std::string substr;
+                        getline( ss, substr, ',' );
+                        result.push_back( substr );
+                    }
+
+
+                    instructions.emplace_back(SetForeignKey, result);
                     continue;
                 }
                 if (keyword == "@Null") {
-                    instructions.emplace_back(SetNull, attribute);
+                    instructions.push_back(Token(SetNull, {attribute}));
                     continue;
                 }
                 throw std::invalid_argument("Invaild Source Code");

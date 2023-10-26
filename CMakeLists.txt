@@ -16,7 +16,9 @@ add_executable(NekoDBMS src/main.cpp
         src/Compiler/Lexer.cpp
         src/Compiler/Token.cpp
         src/Gateways/SourceCodeGateway.h
-        src/Gateways/SourceCodeGateway.cpp)
+        src/Gateways/SourceCodeGateway.cpp
+        src/Compiler/Paser.cpp
+        src/Compiler/Paser.h)
 
 enable_testing()
 
@@ -28,7 +30,10 @@ add_executable(
         src/Gateways/SourceCodeGateway.h
         src/Gateways/SourceCodeGateway.cpp
         test/Gateways/TestSourceCodeGateway.cpp
-        test/Compiler/TestLexer.cpp)
+        test/Compiler/TestLexer.cpp
+        src/Compiler/Paser.cpp
+        src/Compiler/Paser.h
+        test/Compiler/TestParser.cpp)
 target_link_libraries(
         NekoDBMSTest
         GTest::gtest_main

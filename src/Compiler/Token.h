@@ -7,6 +7,7 @@
 
 
 #include <string>
+#include <vector>
 
 enum TokenType {
     CreateDatabase,
@@ -22,13 +23,13 @@ enum TokenType {
 
 class Token {
     TokenType type;
-    std::string value;
+    std::vector<std::string> value;
 
 public:
-    Token(TokenType type, std::string value);
+    Token(TokenType type, std::vector<std::string> value);
 
     TokenType getType();
-    std::string getValue();
+    std::vector<std::string> getValue();
 
     std::string toString();
 
