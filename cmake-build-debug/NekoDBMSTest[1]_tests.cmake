@@ -1,7 +1,0 @@
-add_test([=[TestSourceCodeGateway.TestReadExampleFile]=]  /home/Daniel/Documents/Projects/database-builder-cli/cmake-build-debug/NekoDBMSTest [==[--gtest_filter=TestSourceCodeGateway.TestReadExampleFile]==] --gtest_also_run_disabled_tests)
-set_tests_properties([=[TestSourceCodeGateway.TestReadExampleFile]=]  PROPERTIES WORKING_DIRECTORY /home/Daniel/Documents/Projects/database-builder-cli/cmake-build-debug SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
-add_test([=[TestLexer.TestFileToVector]=]  /home/Daniel/Documents/Projects/database-builder-cli/cmake-build-debug/NekoDBMSTest [==[--gtest_filter=TestLexer.TestFileToVector]==] --gtest_also_run_disabled_tests)
-set_tests_properties([=[TestLexer.TestFileToVector]=]  PROPERTIES WORKING_DIRECTORY /home/Daniel/Documents/Projects/database-builder-cli/cmake-build-debug SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
-add_test([=[TestLexer.TestFileToTokens]=]  /home/Daniel/Documents/Projects/database-builder-cli/cmake-build-debug/NekoDBMSTest [==[--gtest_filter=TestLexer.TestFileToTokens]==] --gtest_also_run_disabled_tests)
-set_tests_properties([=[TestLexer.TestFileToTokens]=]  PROPERTIES WORKING_DIRECTORY /home/Daniel/Documents/Projects/database-builder-cli/cmake-build-debug SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
-set(  NekoDBMSTest_TESTS TestSourceCodeGateway.TestReadExampleFile TestLexer.TestFileToVector TestLexer.TestFileToTokens)
