@@ -17,9 +17,9 @@ enum ColumnType {
     BOOLEAN
 };
 
-struct PrimaryKey {
-    std::string name;
-    std::vector<std::string> foreignColumns = {};
+struct Constriant {
+    std::vector<std::string> foreignKeys;
+    std::vector<std::string> localKeys;
 };
 
 struct Column {
@@ -35,7 +35,7 @@ struct Table {
     std::string name;
     std::vector<Column> columns = {};
     std::vector<std::string> primaryKey = {};
-    std::map<std::string, std::vector<std::string> > constraints = {};
+    std::map<std::string, Constriant> constraints = {};
 
     explicit Table(std::string name): name(name)
             {}

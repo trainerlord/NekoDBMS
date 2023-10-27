@@ -21,11 +21,14 @@ std::vector<std::string> Token::getValue() {
 }
 
 std::string Token::toString() {
-    std::ostringstream out;
-    if (!this->value.empty())
-    {
-        std::copy(std::begin(this->value), std::end(this->value) - 1, std::ostream_iterator<std::string>(out, ","));
-        out << this->value.back();
+    std::stringstream out;
+    for (std::string arg: this->value) {
+        out << arg << ",";
     }
-    return std::format("{0}:{1}", (int) this->type, out.str());
+
+    std::string result = out.str().substr(0, out.str().length() - 1);
+
+    //result.pop_back();
+
+    return std::format("{0}:{1}", (int) this->type, result);
 }

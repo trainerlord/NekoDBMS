@@ -63,7 +63,7 @@ std::vector<Token> Lexer::lexFile() {
                         currentWord++;
                         dependsKeyWord << text.at(currentWord);
                     } while (!text.at(currentWord).ends_with(")"));
-
+                    std::string debug = dependsKeyWord.str();
                     keywords.push_back(dependsKeyWord.str());
                     currentWord++;
                     continue;
@@ -104,17 +104,18 @@ std::vector<Token> Lexer::lexFile() {
                     unsigned last = keyword.find(')');
                     std::string args = keyword.substr (first,last-first);
 
-                    std::stringstream ss( "1,1,1,1, or something else ,1,1,1,0" );
+                    std::stringstream ss(args);
+                    std::string temporayRefrence;
                     std::vector<std::string> result;
 
-                    result.push_back(attribute);
-                    while( ss.good() )
-                    {
-                        std::string substr;
-                        getline( ss, substr, ',' );
-                        result.push_back( substr );
-                    }
 
+                    std::string debug = ss.str();
+
+                    result.push_back(attribute);
+                    while (std::getline(ss, temporayRefrence, ',')) {
+
+                        result.push_back(temporayRefrence);
+                    }
 
                     instructions.emplace_back(SetForeignKey, result);
                     continue;

@@ -31,7 +31,11 @@ ParsedSource Paser::parse() {
                 break;
             case SetForeignKey:
                 this->src.databases.at(this->getIndexOfDatabase(currentDatabase)).Tables.at(this->getIndexOfTable(currentDatabase, currentTable))
-                .constraints[token.getValue().at(2)].push_back(token.getValue().at(1));
+                .constraints[token.getValue().at(2)].foreignKeys.push_back(token.getValue().at(1));
+
+                this->src.databases.at(this->getIndexOfDatabase(currentDatabase)).Tables.at(this->getIndexOfTable(currentDatabase, currentTable))
+                        .constraints[token.getValue().at(2)].localKeys.push_back(token.getValue().at(0));
+
                 break;
             case SetNull:
                 columnIndex = this->getIndexOfColumn(currentDatabase, currentTable, token.getValue().at(0));
