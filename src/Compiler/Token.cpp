@@ -20,6 +20,10 @@ std::vector<std::string> Token::getValue() {
     return this->value;
 }
 
+void Token::setValue(std::vector<std::string> value) {
+    this->value = value;
+}
+
 std::string Token::toString() {
     std::stringstream out;
     for (std::string arg: this->value) {

@@ -7,6 +7,8 @@
 #include <sstream>
 #include <iterator>
 #include "Lexer.h"
+#include "Lexer/Keywords/KeywordSchema.h"
+#include "Lexer/Keywords/KeywordTable.h"
 
 Lexer::Lexer(std::string text) {
     this->text = textBlobToVector(text);
@@ -27,22 +29,12 @@ std::vector<Token> Lexer::lexFile() {
     for (int currentWord = 0; currentWord < this->text.size(); currentWord++) {
         this->current_word = text.at(currentWord);
         if (this->text.at(currentWord) == "@Schema") {
-            if (this->text.at(currentWord + 1) == "{" && this->text.at(currentWord + 2) != "{") {
-                //Source Code Format Error
-                throw std::invalid_argument("Invaild Source Code");
-            }
-            instructions.push_back(Token(CreateDatabase,{text.at(currentWord + 1)}));
-            currentWord += 2;
+            instructions.push_back(KeywordSchema().lex(&currentWord, text));
             continue;
         }
 
         if (this->text.at(currentWord) == "@Table") {
-            if (this->text.at(currentWord + 1) == "{" && this->text.at(currentWord + 2) != "{") {
-                //Source Code Format Error
-                throw std::invalid_argument("Invaild Source Code");
-            }
-            instructions.push_back(Token(CreateTable,{text.at(currentWord + 1)}));
-            currentWord += 2;
+            instructions.push_back(KeywordTable().lex(&currentWord, text));
             continue;
         }
 

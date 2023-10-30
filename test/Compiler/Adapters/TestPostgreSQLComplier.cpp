@@ -17,9 +17,11 @@ TEST(TestPostgreSQLComplier, TestFileToCompile) {
 
     PostgreSQLComplier comp(src);
 
-    for (std::string command: comp.getDBCreationCommands()) {
-        std::cout << command << std::endl;
-    }
 
-    EXPECT_EQ(1, 1);
+    std::vector<std::string> commands = comp.getDBCreationCommands();
+
+    EXPECT_EQ("CREATE DATABASE \"NekoSquare\";", commands.at(0));
+    EXPECT_EQ("CREATE TABLE \"NekoSquare\".\"Accounts\" (\"email_address\" TEXT, \"password\" TEXT,  PRIMARY KEY (email_address));", commands.at(1));
+    EXPECT_EQ("CREATE TABLE \"NekoSquare\".\"Tokens\" (\"email_address\" TEXT, \"token\" TEXT,  PRIMARY KEY (email_address), CONSTRAINT \"fk_accounts\"  FOREIGN KEY(email_address) REFERENCES \"Accounts\" (email_address));", commands.at(2));
+
 }

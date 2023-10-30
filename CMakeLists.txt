@@ -19,7 +19,15 @@ add_executable(NekoDBMS src/main.cpp
         src/Gateways/SourceCodeGateway.cpp
         src/Compiler/Paser.cpp
         src/Compiler/Paser.h src/Compiler/Adapters/AbstractComplier.cpp src/Compiler/Adapters/AbstractComplier.h src/Compiler/Adapters/PostgreSQLComplier.cpp src/Compiler/Adapters/PostgreSQLComplier.h
-        )
+        src/Compiler/Lexer/Keywords/Abstract/BasicKeyword.h
+        src/Compiler/Lexer/Keywords/Abstract/ObserverKeyword.cpp
+        src/Compiler/Lexer/Keywords/Abstract/ObserverKeyword.h
+        src/Compiler/Lexer/Keywords/KeywordSchema.cpp
+        src/Compiler/Lexer/Keywords/KeywordSchema.h
+        src/Compiler/Lexer/Keywords/Abstract/ObserverKeyword.cpp
+        src/Compiler/Lexer/Keywords/KeywordTable.cpp
+        src/Compiler/Lexer/Keywords/KeywordTable.h
+)
 
 enable_testing()
 
@@ -39,8 +47,15 @@ add_executable(
         src/Compiler/Adapters/AbstractComplier.cpp
         src/Compiler/Adapters/AbstractComplier.h
         test/Compiler/TestParser.cpp
-
-        test/Compiler/Adapters/TestPostgreSQLComplier.cpp)
+        test/Compiler/Adapters/TestPostgreSQLComplier.cpp
+        src/Compiler/Lexer/Keywords/Abstract/BasicKeyword.h
+        src/Compiler/Lexer/Keywords/Abstract/ObserverKeyword.cpp
+        src/Compiler/Lexer/Keywords/Abstract/ObserverKeyword.h
+        src/Compiler/Lexer/Keywords/KeywordSchema.cpp
+        src/Compiler/Lexer/Keywords/KeywordSchema.h
+        src/Compiler/Lexer/Keywords/Abstract/ObserverKeyword.cpp
+        src/Compiler/Lexer/Keywords/KeywordTable.cpp
+        src/Compiler/Lexer/Keywords/KeywordTable.h)
 target_link_libraries(
         NekoDBMSTest
         GTest::gtest_main

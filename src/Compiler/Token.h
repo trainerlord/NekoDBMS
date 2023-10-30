@@ -31,6 +31,8 @@ public:
     TokenType getType();
     std::vector<std::string> getValue();
 
+    void setValue(std::vector<std::string> value);
+
     std::string toString();
 
 };
