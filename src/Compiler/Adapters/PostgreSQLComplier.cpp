@@ -28,7 +28,7 @@ std::string PostgreSQLComplier::createTableCommand(Table table) {
     if (!table.constraints.empty()) {
         for(std::map<std::string,std::vector<std::string>>::iterator it = table.constraints.begin(); it != table.constraints.end(); ++it) {
             cmd << std::format(" CONSTRAINT {} ", it->first);
-
+            //?
             cmd << " FOREIGN KEY({";
             for (std::string localKey : table.constraints.at(it->first).localKeys) {
                 cmd << localKey << ", ";
