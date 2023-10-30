@@ -6,10 +6,6 @@
 
 #include "PostgreSQLComplier.h"
 
-std::string PostgreSQLComplier::createDBCommand(Database db) {
-    std::string cmd = std::format("CREATE DATABASE {};", db.name);
-    return cmd;
-}
 
 std::string PostgreSQLComplier::createTableCommand(Table table) {
     std::stringstream cmd;
@@ -26,34 +22,54 @@ std::string PostgreSQLComplier::createTableCommand(Table table) {
 
 
     if (!table.constraints.empty()) {
-        for(std::map<std::string,std::vector<std::string>>::iterator it = table.constraints.begin(); it != table.constraints.end(); ++it) {
-            cmd << std::format(" CONSTRAINT {} ", it->first);
+        for(auto it = table.constraints.begin(); it != table.constraints.end(); ++it) {
+            cmd << std::format(") CONSTRAINT {} ", it->first);
             //?
-            cmd << " FOREIGN KEY({";
+            cmd << " FOREIGN KEY(";
             for (std::string localKey : table.constraints.at(it->first).localKeys) {
                 cmd << localKey << ", ";
             }
             cmd.seekp(-2, std::ios_base::end);
-            cmd << ")";
+            cmd << ") ";
 
-            //TODO Write Refrences
-            /* REFERENCES table(col1,col2)*/
+            cmd << "REFERENCES ";
 
+            std::string currentTable = "";
+
+            for (std::string foriengkey : table.constraints.at(it->first).foreignKeys) {
+                if (currentTable == "") {
+                    currentTable = foriengkey.substr(0, foriengkey.find('.'));
+                    cmd << currentTable << " (" << foriengkey.substr(foriengkey.find('.') + 1,foriengkey.length());
+                    continue;
+                }
+
+                if (currentTable == foriengkey.substr(0, foriengkey.find('.'))) {
+                    cmd << " ," << foriengkey.substr(foriengkey.find('.')+ 1,foriengkey.length());
+                } else {
+                    //throw error;
+                }
+            }
         }
     }
-
+    cmd << ");";
+    return cmd.str();
 }
 
 std::string PostgreSQLComplier::getColumnType(Column col) {
     switch (col.type) {
-        case UNDEFINED:
-            //throw error
-            return "INT";
         case STRING:
             return "TEXT";
         case INTEGER:
             return "INT";
         case BOOLEAN:
             return "BOOLEAN";
+        default:
+            //throw error
+            return "INT";
     }
+}
+
+std::string PostgreSQLComplier::createDBCommand(Database db)  {
+    std::string cmd = std::format("CREATE DATABASE {};", db.name);
+    return cmd;
 }

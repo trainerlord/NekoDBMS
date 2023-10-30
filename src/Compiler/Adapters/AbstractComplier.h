@@ -6,18 +6,21 @@
 #define NEKODBMS_ABSTRACTCOMPLIER_H
 
 
+#include <utility>
+
 #include "../Paser.h"
 
 class AbstractComplier {
+protected:
     ParsedSource src;
-    virtual std::string createDBCommand(Database db);
-    virtual std::string createTableCommand(Table table);
 
-    virtual std::string getColumnType(Column col);
+    virtual std::string createDBCommand(Database db) {return "";};
+    virtual std::string createTableCommand(Table table) {return "";};
+    virtual std::string getColumnType(Column col) {return "";};
 
 
 public:
-    AbstractComplier(ParsedSource src);
+    explicit AbstractComplier(ParsedSource src) {this->src = std::move(src);}
     std::vector<std::string> getDBCreationCommands();
 };
 

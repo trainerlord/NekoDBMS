@@ -8,11 +8,16 @@
 
 #include "AbstractComplier.h"
 
-class PostgreSQLComplier: AbstractComplier {
+class PostgreSQLComplier: public AbstractComplier {
+protected:
     std::string createDBCommand(Database db) override;
     std::string createTableCommand(Table table) override;
-
     std::string getColumnType(Column col) override;
+
+
+public:
+    using AbstractComplier::AbstractComplier;
+    //using AbstractComplier::getDBCreationCommands;
 };
 
 

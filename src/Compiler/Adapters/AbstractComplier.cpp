@@ -7,10 +7,10 @@
 std::vector<std::string> AbstractComplier::getDBCreationCommands() {
     std::vector<std::string> cmds;
 
-    for(Database db : this->src.databases) {
+    for(const Database& db : this->src.databases) {
         cmds.push_back(this->createDBCommand(db));
 
-        for (Table table : db.Tables) {
+        for (const Table& table : db.Tables) {
             cmds.push_back(this->createTableCommand(table));
         }
 

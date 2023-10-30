@@ -18,7 +18,8 @@ add_executable(NekoDBMS src/main.cpp
         src/Gateways/SourceCodeGateway.h
         src/Gateways/SourceCodeGateway.cpp
         src/Compiler/Paser.cpp
-        src/Compiler/Paser.h src/Compiler/Adapters/AbstractComplier.cpp src/Compiler/Adapters/AbstractComplier.h src/Compiler/Adapters/PostgreSQLComplier.cpp src/Compiler/Adapters/PostgreSQLComplier.h)
+        src/Compiler/Paser.h src/Compiler/Adapters/AbstractComplier.cpp src/Compiler/Adapters/AbstractComplier.h src/Compiler/Adapters/PostgreSQLComplier.cpp src/Compiler/Adapters/PostgreSQLComplier.h
+        )
 
 enable_testing()
 
@@ -33,7 +34,13 @@ add_executable(
         test/Compiler/TestLexer.cpp
         src/Compiler/Paser.cpp
         src/Compiler/Paser.h
-        test/Compiler/TestParser.cpp)
+        src/Compiler/Adapters/PostgreSQLComplier.cpp
+        src/Compiler/Adapters/PostgreSQLComplier.h
+        src/Compiler/Adapters/AbstractComplier.cpp
+        src/Compiler/Adapters/AbstractComplier.h
+        test/Compiler/TestParser.cpp
+
+        test/Compiler/Adapters/TestPostgreSQLComplier.cpp)
 target_link_libraries(
         NekoDBMSTest
         GTest::gtest_main
