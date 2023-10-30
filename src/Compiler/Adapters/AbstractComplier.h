@@ -15,7 +15,7 @@ protected:
     ParsedSource src;
 
     virtual std::string createDBCommand(Database db) {return "";};
-    virtual std::string createTableCommand(Table table) {return "";};
+    virtual std::string createTableCommand(std::string parent, Table table) {return "";};
     virtual std::string getColumnType(Column col) {return "";};
 
 

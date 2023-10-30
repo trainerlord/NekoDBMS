@@ -7,11 +7,11 @@
 #include "PostgreSQLComplier.h"
 
 
-std::string PostgreSQLComplier::createTableCommand(Table table) {
+std::string PostgreSQLComplier::createTableCommand(std::string parent, Table table) {
     std::stringstream cmd;
-    cmd << std::format("CREATE TABLE {} (", table.name);
+    cmd << std::format(R"(CREATE TABLE "{}"."{}" ()", parent,table.name);
     for (Column col : table.columns) {
-        cmd << std::format(" \"{}\" {} {},", col.name, this->getColumnType(col), (col.optional ? "NOT NULL" : ""));
+        cmd << std::format("\"{}\" {}{}, ", col.name, this->getColumnType(col), (col.optional ? " NOT NULL" : ""));
     }
 
     cmd << " PRIMARY KEY (";
@@ -20,10 +20,9 @@ std::string PostgreSQLComplier::createTableCommand(Table table) {
     }
     cmd.seekp(-2, std::ios_base::end);
 
-
     if (!table.constraints.empty()) {
         for(auto it = table.constraints.begin(); it != table.constraints.end(); ++it) {
-            cmd << std::format(") CONSTRAINT {} ", it->first);
+            cmd << std::format("), CONSTRAINT {} ", it->first);
             //?
             cmd << " FOREIGN KEY(";
             for (std::string localKey : table.constraints.at(it->first).localKeys) {
@@ -39,7 +38,7 @@ std::string PostgreSQLComplier::createTableCommand(Table table) {
             for (std::string foriengkey : table.constraints.at(it->first).foreignKeys) {
                 if (currentTable == "") {
                     currentTable = foriengkey.substr(0, foriengkey.find('.'));
-                    cmd << currentTable << " (" << foriengkey.substr(foriengkey.find('.') + 1,foriengkey.length());
+                    cmd << "\"" << currentTable << "\"" << " (" << foriengkey.substr(foriengkey.find('.') + 1,foriengkey.length());
                     continue;
                 }
 
@@ -51,7 +50,7 @@ std::string PostgreSQLComplier::createTableCommand(Table table) {
             }
         }
     }
-    cmd << ");";
+    cmd << "));";
     return cmd.str();
 }
 
@@ -70,6 +69,6 @@ std::string PostgreSQLComplier::getColumnType(Column col) {
 }
 
 std::string PostgreSQLComplier::createDBCommand(Database db)  {
-    std::string cmd = std::format("CREATE DATABASE {};", db.name);
+    std::string cmd = std::format(R"(CREATE DATABASE "{0}";)", db.name);
     return cmd;
 }

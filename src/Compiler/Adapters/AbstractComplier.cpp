@@ -11,7 +11,7 @@ std::vector<std::string> AbstractComplier::getDBCreationCommands() {
         cmds.push_back(this->createDBCommand(db));
 
         for (const Table& table : db.Tables) {
-            cmds.push_back(this->createTableCommand(table));
+            cmds.push_back(this->createTableCommand(db.name, table));
         }
 
     }
