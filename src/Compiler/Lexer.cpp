@@ -9,6 +9,12 @@
 #include "Lexer.h"
 #include "Lexer/Keywords/KeywordSchema.h"
 #include "Lexer/Keywords/KeywordTable.h"
+#include "Lexer/Keywords/KeywordEnd.h"
+#include "Lexer/Keywords/KeywordPrimary.h"
+#include "Lexer/Keywords/KeywordString.h"
+#include "Lexer/Keywords/KeywordInteger.h"
+#include "Lexer/Keywords/KeywordBoolean.h"
+#include "Lexer/Keywords/KeywordDepends.h"
 
 Lexer::Lexer(std::string text) {
     this->text = textBlobToVector(text);
@@ -22,109 +28,57 @@ std::vector<std::string> Lexer::textBlobToVector(std::string text) {
     return words;
 }
 
-std::vector<Token> Lexer::lexFile() {
+std::vector<Token *> Lexer::lexFile() {
     //text is the blob of stuff
-    std::vector<Token> instructions;
+    std::vector<Token *> instructions;
 
     for (int currentWord = 0; currentWord < this->text.size(); currentWord++) {
         this->current_word = text.at(currentWord);
-        if (this->text.at(currentWord) == "@Schema") {
-            instructions.push_back(KeywordSchema().lex(&currentWord, text));
+        if (this->text.at(currentWord).starts_with("@Schema")) {
+            instructions.push_back((new  KeywordSchema())->lex(&currentWord, text));
             continue;
         }
 
-        if (this->text.at(currentWord) == "@Table") {
-            instructions.push_back(KeywordTable().lex(&currentWord, text));
+        if (this->text.at(currentWord).starts_with("@Table")) {
+            instructions.push_back((new KeywordTable())->lex(&currentWord, text));
             continue;
         }
 
-        if (this->text.at(currentWord) == "}") {
-            instructions.push_back(Token(End,{}));
+        if (this->text.at(currentWord).starts_with("@Primary")) {
+            instructions.push_back((new KeywordPrimary())->lex(&currentWord, text));
             continue;
         }
 
-        if (this->text.at(currentWord).starts_with('@')) {
-            std::vector<std::string> keywords;
-            std::string attribute;
-
-            while (text.at(currentWord).starts_with('@')) {
-                if (text.at(currentWord).starts_with("@Depends")) {
-                    std::stringstream dependsKeyWord;
-                    currentWord--;
-                    do {
-                        currentWord++;
-                        dependsKeyWord << text.at(currentWord);
-                    } while (!text.at(currentWord).ends_with(")"));
-                    std::string debug = dependsKeyWord.str();
-                    keywords.push_back(dependsKeyWord.str());
-                    currentWord++;
-                    continue;
-                }
-
-
-                keywords.push_back(text.at(currentWord));
-                currentWord++;
-            }
-            attribute = text.at(currentWord);
-
-            if (!attribute.ends_with(';')) {
-                throw std::invalid_argument("Invaild Source Code");
-            }
-            attribute.pop_back();
-
-            //Handle Every Other Keywords
-            for(std::string keyword : keywords) {
-                if (keyword == "@Primary") {
-                    instructions.push_back(Token(SetPrimaryKey, {attribute}));
-                    continue;
-                }
-                if (keyword == "@String") {
-                    instructions.push_back(Token(String, {attribute}));
-                    continue;
-                }
-                if (keyword == "@Integer") {
-                    instructions.push_back(Token(Integer, {attribute}));
-                    continue;
-                }
-                if (keyword == "@Boolean") {
-                    instructions.push_back(Token(Boolean, {attribute}));
-                    continue;
-                }
-                if (keyword.starts_with("@Depends")) {
-                    //Parse the Parameters
-                    unsigned first = keyword.find('(') + 1;
-                    unsigned last = keyword.find(')');
-                    std::string args = keyword.substr (first,last-first);
-
-                    std::stringstream ss(args);
-                    std::string temporayRefrence;
-                    std::vector<std::string> result;
-
-
-                    std::string debug = ss.str();
-
-                    result.push_back(attribute);
-                    while (std::getline(ss, temporayRefrence, ',')) {
-
-                        result.push_back(temporayRefrence);
-                    }
-
-                    instructions.emplace_back(SetForeignKey, result);
-                    continue;
-                }
-                if (keyword == "@Null") {
-                    instructions.push_back(Token(SetNull, {attribute}));
-                    continue;
-                }
-                throw std::invalid_argument("Invaild Source Code");
-            }
+        if (this->text.at(currentWord).starts_with("@String")) {
+            instructions.push_back((new KeywordString())->lex(&currentWord, text));
             continue;
         }
-        throw std::invalid_argument("Invaild Source Code");
+
+        if (this->text.at(currentWord).starts_with("@Integer")) {
+            instructions.push_back((new KeywordInteger())->lex(&currentWord, text));
+            continue;
+        }
+
+        if (this->text.at(currentWord).starts_with("@Boolean")) {
+            instructions.push_back((new KeywordBoolean())->lex(&currentWord, text));
+            continue;
+        }
+
+        if (this->text.at(currentWord).starts_with("@Depends")) {
+            instructions.push_back((new KeywordDepends())->lex(&currentWord, text));
+            continue;
+        }
+
+        if (this->text.at(currentWord).starts_with("@Null")) {
+            instructions.push_back((new  KeywordDepends())->lex(&currentWord, text));
+            continue;
+        }
+
+        if (this->text.at(currentWord).starts_with("}")) {
+            instructions.push_back((new KeywordEnd())->lex(&currentWord, text));
+            continue;
+        }
     }
-
-
-
     return instructions;
 }
 

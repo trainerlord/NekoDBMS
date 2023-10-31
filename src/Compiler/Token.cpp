@@ -21,7 +21,7 @@ std::vector<std::string> Token::getValue() {
 }
 
 void Token::setValue(std::vector<std::string> value) {
-    this->value = value;
+    this->value = std::move(value);
 }
 
 std::string Token::toString() {

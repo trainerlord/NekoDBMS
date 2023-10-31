@@ -57,7 +57,7 @@ struct ParsedSource {
 
 
 class Paser {
-    std::vector<Token> tokens;
+    std::vector<Token *> tokens;
     ParsedSource src;
 
     int getIndexOfDatabase(std::string db);
@@ -65,7 +65,7 @@ class Paser {
     int getIndexOfColumn(std::string db, std::string table, std::string column);
 
 public:
-    Paser(std::vector<Token> tokens);
+    Paser(std::vector<Token *> tokens);
     ParsedSource parse();
 };
 

@@ -15,7 +15,7 @@ class Lexer {
 
 public:
     Lexer(std::string text);
-    std::vector<Token> lexFile();
+    std::vector<Token *> lexFile();
 
     static  std::vector<std::string> textBlobToVector(std::string text);
 };

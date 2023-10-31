@@ -4,7 +4,7 @@
 
 #include "Paser.h"
 
-Paser::Paser(std::vector<Token> tokens) {
+Paser::Paser(std::vector<Token *> tokens) {
     this->tokens = tokens;
 }
 
@@ -13,75 +13,75 @@ ParsedSource Paser::parse() {
     std::string currentTable;
     int columnIndex = -1;
 
-    for (Token token : this->tokens) {
+    for (Token *token : this->tokens) {
 
-        switch (token.getType()) {
+        switch (token->getType()) {
             case CreateDatabase:
-                this->src.databases.emplace_back(token.getValue().at(0));
-                currentDatabase = token.getValue().at(0);
+                this->src.databases.emplace_back(token->getValue().at(0));
+                currentDatabase = token->getValue().at(0);
                 break;
             case CreateTable:
                 this->src.databases.at(this->getIndexOfDatabase(currentDatabase)).Tables
-                .emplace_back(token.getValue().at(0));
-                currentTable = token.getValue().at(0);
+                .emplace_back(token->getValue().at(0));
+                currentTable = token->getValue().at(0);
                 break;
             case SetPrimaryKey:
                 this->src.databases.at(this->getIndexOfDatabase(currentDatabase)).Tables.at(this->getIndexOfTable(currentDatabase, currentTable))
-                .primaryKey.emplace_back(token.getValue().at(0));
+                .primaryKey.emplace_back(token->getValue().at(0));
                 break;
             case SetForeignKey:
                 this->src.databases.at(this->getIndexOfDatabase(currentDatabase)).Tables.at(this->getIndexOfTable(currentDatabase, currentTable))
-                .constraints[token.getValue().at(2)].foreignKeys.push_back(token.getValue().at(1));
+                .constraints[token->getValue().at(2)].foreignKeys.push_back(token->getValue().at(1));
 
                 this->src.databases.at(this->getIndexOfDatabase(currentDatabase)).Tables.at(this->getIndexOfTable(currentDatabase, currentTable))
-                        .constraints[token.getValue().at(2)].localKeys.push_back(token.getValue().at(0));
+                        .constraints[token->getValue().at(2)].localKeys.push_back(token->getValue().at(0));
 
                 break;
             case SetNull:
-                columnIndex = this->getIndexOfColumn(currentDatabase, currentTable, token.getValue().at(0));
+                columnIndex = this->getIndexOfColumn(currentDatabase, currentTable, token->getValue().at(0));
                 if (columnIndex == -1) {
                     this->src.databases.at(this->getIndexOfDatabase(currentDatabase)).Tables.at(this->getIndexOfTable(currentDatabase, currentTable))
-                    .columns.push_back(Column(token.getValue().at(0), UNDEFINED));
+                    .columns.push_back(Column(token->getValue().at(0), UNDEFINED));
                 }
 
                 this->src.databases.at(this->getIndexOfDatabase(currentDatabase)).Tables.at(this->getIndexOfTable(currentDatabase, currentTable))
-                .columns.at(this->getIndexOfColumn(currentDatabase, currentTable, token.getValue().at(0)))
+                .columns.at(this->getIndexOfColumn(currentDatabase, currentTable, token->getValue().at(0)))
                 .optional = true;
                 break;
             case String:
-                columnIndex = this->getIndexOfColumn(currentDatabase, currentTable, token.getValue().at(0));
+                columnIndex = this->getIndexOfColumn(currentDatabase, currentTable, token->getValue().at(0));
                 if (columnIndex == -1) {
                     this->src.databases.at(this->getIndexOfDatabase(currentDatabase)).Tables.at(this->getIndexOfTable(currentDatabase, currentTable))
-                            .columns.emplace_back(token.getValue().at(0), STRING);
+                            .columns.emplace_back(token->getValue().at(0), STRING);
                     break;
                 }
 
                 this->src.databases.at(this->getIndexOfDatabase(currentDatabase)).Tables.at(this->getIndexOfTable(currentDatabase, currentTable))
-                .columns.at(this->getIndexOfColumn(currentDatabase, currentTable, token.getValue().at(0)))
+                .columns.at(this->getIndexOfColumn(currentDatabase, currentTable, token->getValue().at(0)))
                 .type = STRING;
                 break;
             case Integer:
-                columnIndex = this->getIndexOfColumn(currentDatabase, currentTable, token.getValue().at(0));
+                columnIndex = this->getIndexOfColumn(currentDatabase, currentTable, token->getValue().at(0));
                 if (columnIndex == -1) {
                     this->src.databases.at(this->getIndexOfDatabase(currentDatabase)).Tables.at(this->getIndexOfTable(currentDatabase, currentTable))
-                            .columns.emplace_back(token.getValue().at(0), INTEGER);
+                            .columns.emplace_back(token->getValue().at(0), INTEGER);
                     break;
                 }
 
                 this->src.databases.at(this->getIndexOfDatabase(currentDatabase)).Tables.at(this->getIndexOfTable(currentDatabase, currentTable))
-                        .columns.at(this->getIndexOfColumn(currentDatabase, currentTable, token.getValue().at(0)))
+                        .columns.at(this->getIndexOfColumn(currentDatabase, currentTable, token->getValue().at(0)))
                         .type = INTEGER;
                 break;
             case Boolean:
-                columnIndex = this->getIndexOfColumn(currentDatabase, currentTable, token.getValue().at(0));
+                columnIndex = this->getIndexOfColumn(currentDatabase, currentTable, token->getValue().at(0));
                 if (columnIndex == -1) {
                     this->src.databases.at(this->getIndexOfDatabase(currentDatabase)).Tables.at(this->getIndexOfTable(currentDatabase, currentTable))
-                            .columns.emplace_back(token.getValue().at(0), BOOLEAN);
+                            .columns.emplace_back(token->getValue().at(0), BOOLEAN);
                     break;
                 }
 
                 this->src.databases.at(this->getIndexOfDatabase(currentDatabase)).Tables.at(this->getIndexOfTable(currentDatabase, currentTable))
-                        .columns.at(this->getIndexOfColumn(currentDatabase, currentTable, token.getValue().at(0)))
+                        .columns.at(this->getIndexOfColumn(currentDatabase, currentTable, token->getValue().at(0)))
                         .type = BOOLEAN;
                 break;
             case End:

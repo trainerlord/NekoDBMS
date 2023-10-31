@@ -9,18 +9,12 @@
 #include "BasicKeyword.h"
 
 class ObserverKeyword: public BasicKeyword {
-private:
-    Token *token;
 protected:
-    inline static std::vector<ObserverKeyword *> observers = {};
+    void checkAttribute(int *currentWordIndex, std::vector<std::string> text);
 public:
     ObserverKeyword() = default;
-    void awaitAttribute() { ObserverKeyword::observers.push_back(this); }
-    void updateAttribute(std::vector<std::string> att);
-
-    static void updateObservers(std::string att);
-
-    static void updateObservers(std::vector<std::string> att);
+    virtual void updateAttribute(std::vector<std::string> att) = 0;
+    virtual Token *getTokens() = 0;
 };
 
 

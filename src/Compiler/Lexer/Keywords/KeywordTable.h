@@ -10,7 +10,7 @@
 
 class KeywordTable : BasicKeyword {
 public:
-    Token lex(int *currentWordIndex, std::vector<std::string> text) override;
+    Token *lex(int *currentWordIndex, std::vector<std::string> text) override;
 };
 
 

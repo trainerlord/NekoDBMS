@@ -11,7 +11,7 @@
 
 class BasicKeyword {
 public:
-    virtual Token lex(int *currentWordIndex, std::vector<std::string> text) = 0;
+    virtual Token *lex(int *currentWordIndex, std::vector<std::string> text) = 0;
 };
 
 
