@@ -3,15 +3,17 @@
 //
 
 #include "AbstractComplier.h"
+#include "SchemaInstructions.h"
 
-std::vector<std::string> AbstractComplier::getDBCreationCommands() {
-    std::vector<std::string> cmds;
+SchemaInstructions AbstractComplier::getDBCreationCommands() {
+    SchemaInstructions cmds;
 
     for(const Database& db : this->src.databases) {
-        cmds.push_back(this->createDBCommand(db));
+        cmds.root.push_back(this->createDBCommand(db));
+        cmds.databases[db.name] = DatabaseInstructions {db.name};
 
         for (const Table& table : db.Tables) {
-            cmds.push_back(this->createTableCommand(db.name, table));
+            cmds.databases.at(db.name).tables.push_back(this->createTableCommand(db.name, table));
         }
 
     }

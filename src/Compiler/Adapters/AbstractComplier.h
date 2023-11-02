@@ -9,6 +9,7 @@
 #include <utility>
 
 #include "../Paser.h"
+#include "SchemaInstructions.h"
 
 class AbstractComplier {
 protected:
@@ -21,7 +22,7 @@ protected:
 
 public:
     explicit AbstractComplier(ParsedSource src) {this->src = std::move(src);}
-    std::vector<std::string> getDBCreationCommands();
+    SchemaInstructions getDBCreationCommands();
 };
 
 

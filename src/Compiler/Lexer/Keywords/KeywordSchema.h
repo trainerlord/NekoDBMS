@@ -8,7 +8,7 @@
 
 #include "Abstract/BasicKeyword.h"
 
-class KeywordSchema : BasicKeyword {
+class KeywordSchema : public BasicKeyword {
 public:
     Token *lex(int *currentWordIndex, std::vector<std::string> text) override;
 };

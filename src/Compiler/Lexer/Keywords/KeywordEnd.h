@@ -9,7 +9,7 @@
 #include "../../Token.h"
 #include "Abstract/BasicKeyword.h"
 
-class KeywordEnd : BasicKeyword {
+class KeywordEnd : public BasicKeyword {
 public:
     Token *lex(int *currentWordIndex, std::vector<std::string> text) override;
 

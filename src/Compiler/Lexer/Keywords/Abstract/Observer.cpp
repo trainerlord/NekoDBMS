@@ -6,7 +6,7 @@
 #include "Observer.h"
 
 void Observer::updateObservers(std::vector<std::string> att) {
-    std::cout << "Observing: "<< Observer::getInst()->observers.size() << std::endl;
+    //std::cout << "Observing: "<< Observer::getInst()->observers.size() << std::endl;
     std::vector<ObserverKeyword *> x = Observer::getInst()->observers;
 
     for (int i = 0; i < Observer::getInst()->observers.size(); i++) {

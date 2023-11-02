@@ -9,7 +9,7 @@
 #include "../../Token.h"
 #include "Abstract/ObserverKeyword.h"
 
-class KeywordBoolean : ObserverKeyword {
+class KeywordBoolean : public ObserverKeyword {
 private:
     Token *token;
 public:

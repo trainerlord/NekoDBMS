@@ -8,7 +8,7 @@
 
 #include "Abstract/ObserverKeyword.h"
 
-class KeywordDepends : ObserverKeyword {
+class KeywordDepends : public ObserverKeyword {
 private:
     Token *token;
 public:

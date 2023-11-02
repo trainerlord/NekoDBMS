@@ -7,11 +7,16 @@
 
 #include <string>
 #include "Token.h"
+#include "Lexer/Keywords/Abstract/BasicKeyword.h"
 
 class Lexer {
+private:
+    //instance Variables
     std::vector<std::string> text;
     int position;
     std::string current_word;
+
+
 
 public:
     Lexer(std::string text);
