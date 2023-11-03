@@ -4,7 +4,7 @@
 
 #include <stdexcept>
 #include "KeywordPrimary.h"
-#include "Abstract/Observer.h"
+#include "../Abstract/Observer.h"
 
 Token *KeywordPrimary::lex(int *currentWordIndex, std::vector<std::string> text) {
     Token *temp = new Token(SetPrimaryKey, {});

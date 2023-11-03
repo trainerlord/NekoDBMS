@@ -7,14 +7,14 @@
 #include <sstream>
 #include <iterator>
 #include "Lexer.h"
-#include "Lexer/Keywords/KeywordSchema.h"
-#include "Lexer/Keywords/KeywordTable.h"
-#include "Lexer/Keywords/KeywordEnd.h"
-#include "Lexer/Keywords/KeywordPrimary.h"
-#include "Lexer/Keywords/KeywordString.h"
-#include "Lexer/Keywords/KeywordInteger.h"
-#include "Lexer/Keywords/KeywordBoolean.h"
-#include "Lexer/Keywords/KeywordDepends.h"
+#include "Lexer/Keywords/Constructors/KeywordSchema.h"
+#include "Lexer/Keywords/Constructors/KeywordTable.h"
+#include "Lexer/Keywords/Operations/KeywordEnd.h"
+#include "Lexer/Keywords/Types/KeywordPrimary.h"
+#include "Lexer/Keywords/Types/KeywordString.h"
+#include "Lexer/Keywords/Types/KeywordInteger.h"
+#include "Lexer/Keywords/Types/KeywordBoolean.h"
+#include "Lexer/Keywords/Operations/KeywordDepends.h"
 #include "Lexer/KeywordFactory.h"
 
 Lexer::Lexer(std::string text) {

@@ -6,7 +6,7 @@
 #define NEKODBMS_KEYWORDFACTORY_H
 
 #include "Keywords/Abstract/BasicKeyword.h"
-#include "Keywords/KeywordBoolean.h"
+#include "Keywords/Types/KeywordBoolean.h"
 
 enum KeywordTypes {
     BooleanKey,

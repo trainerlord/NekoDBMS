@@ -6,7 +6,7 @@
 #define NEKODBMS_KEYWORDTABLE_H
 
 
-#include "Abstract/BasicKeyword.h"
+#include "../Abstract/BasicKeyword.h"
 
 class KeywordTable : public BasicKeyword {
 public:

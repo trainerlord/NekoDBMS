@@ -7,12 +7,18 @@
 #include "KeywordSchema.h"
 
 Token *KeywordSchema::lex(int *currentWordIndex, std::vector<std::string> text) {
-    std::cout << "test" << std::endl;
-    if (text.at(*currentWordIndex + 1) == "{" && text.at(*currentWordIndex + 2) != "{") {
+    //std::cout << "test" << std::endl;
+    if (text.at(*currentWordIndex + 1) == "{" && !text.at(*currentWordIndex + 2).starts_with("{")) {
         //Source Code Format Error
         throw std::invalid_argument("Invaild Source Code");
     }
+
+
     Token *temporayToken = new Token(CreateDatabase,{text.at(*currentWordIndex + 1)});
     *currentWordIndex += 2;
+
+    if (text.at(*currentWordIndex) == "{}") {
+        *currentWordIndex -= 1;
+    }
     return temporayToken;
 }

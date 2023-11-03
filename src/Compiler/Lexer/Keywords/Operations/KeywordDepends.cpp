@@ -4,7 +4,7 @@
 
 #include <sstream>
 #include "KeywordDepends.h"
-#include "Abstract/Observer.h"
+#include "../Abstract/Observer.h"
 
 Token *KeywordDepends::lex(int *currentWordIndex, std::vector<std::string> text) {
     std::vector<std::string> keywords;

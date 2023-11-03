@@ -3,16 +3,17 @@
 //
 
 #include "KeywordFactory.h"
-#include "Keywords/KeywordDepends.h"
-#include "Keywords/KeywordEnd.h"
-#include "Keywords/KeywordInteger.h"
-#include "Keywords/KeywordNull.h"
-#include "Keywords/KeywordPrimary.h"
-#include "Keywords/KeywordSchema.h"
-#include "Keywords/KeywordString.h"
-#include "Keywords/KeywordTable.h"
+#include "Keywords/Operations/KeywordDepends.h"
+#include "Keywords/Operations/KeywordEnd.h"
+#include "Keywords/Types/KeywordInteger.h"
+#include "Keywords/Types/KeywordNull.h"
+#include "Keywords/Types/KeywordPrimary.h"
+#include "Keywords/Constructors/KeywordSchema.h"
+#include "Keywords/Types/KeywordString.h"
+#include "Keywords/Constructors/KeywordTable.h"
 
 #include <map>
+#include <iostream>
 
 BasicKeyword *KeywordFactory::createKeyword(KeywordTypes type) {
     switch (type) {
@@ -20,8 +21,6 @@ BasicKeyword *KeywordFactory::createKeyword(KeywordTypes type) {
             return new KeywordBoolean();
         case DependsKey:
             return new KeywordDepends();
-        case EndKey:
-            return new KeywordEnd();
         case IntegerKey:
             return new KeywordInteger();
         case NullKey:
@@ -34,6 +33,8 @@ BasicKeyword *KeywordFactory::createKeyword(KeywordTypes type) {
             return new KeywordString();
         case TableKey:
             return new KeywordTable();
+        default:
+            return new KeywordEnd();
     }
 }
 
@@ -49,10 +50,17 @@ KeywordTypes KeywordFactory::keyToType(std::string key) {
     keywords["@Depends"] = DependsKey;
     keywords["@Null"] = NullKey;
     keywords["}"] = EndKey;
+    keywords["{}"] = EndKey;
+
 
     std::string subKey = key.substr(0, key.find('('));
 
-    return keywords[subKey];
+    try {
+        return keywords[subKey];
+    } catch (int myNum) {
+        std::cout << "Invild Keyword" << subKey << std::endl;
+        exit(0);
+    }
 }
 
 BasicKeyword *KeywordFactory::createKeyword(std::string type) {

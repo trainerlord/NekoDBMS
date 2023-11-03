@@ -6,8 +6,8 @@
 #define NEKODBMS_KEYWORDEND_H
 
 
-#include "../../Token.h"
-#include "Abstract/BasicKeyword.h"
+#include "../../../Token.h"
+#include "../Abstract/BasicKeyword.h"
 
 class KeywordEnd : public BasicKeyword {
 public:

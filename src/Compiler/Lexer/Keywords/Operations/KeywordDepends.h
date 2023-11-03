@@ -6,7 +6,7 @@
 #define NEKODBMS_KEYWORDDEPENDS_H
 
 
-#include "Abstract/ObserverKeyword.h"
+#include "../Abstract/ObserverKeyword.h"
 
 class KeywordDepends : public ObserverKeyword {
 private:

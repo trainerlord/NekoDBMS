@@ -13,10 +13,6 @@ TEST(TestLexer, TestFileToVector) {
 
     EXPECT_EQ(24, words.size());
     return;
-    for(std::string word : words)
-    {
-        std::cout << word << std::endl;
-    }
 }
 
 TEST(TestLexer, TestFileToTokens) {
@@ -34,5 +30,35 @@ TEST(TestLexer, TestFileToTokens) {
         std::cout << token->toString() << std::endl;
     }
 
+    //EXPECT_EQ(1, 1);
+}
+
+TEST(TestLexer, TestEmptySchemaToTokens) {
+    std::string file = "@Schema emptySchema {}";
+
+    Lexer lex(file);
+
+    std::vector<Token *> tokens = lex.lexFile();
+    EXPECT_EQ(2, tokens.size());
+
+    EXPECT_EQ(tokens.at(0)->getType(), CreateDatabase);
+    EXPECT_EQ(tokens.at(0)->getValue().at(0), "emptySchema");
+
+    EXPECT_EQ(tokens.at(1)->getType(), End);
+    //EXPECT_EQ(1, 1);
+}
+
+TEST(TestLexer, TestEmptySchemaWSplitToTokens) {
+    std::string file = "@Schema emptySchema { }";
+
+    Lexer lex(file);
+
+    std::vector<Token *> tokens = lex.lexFile();
+    EXPECT_EQ(2, tokens.size());
+
+    EXPECT_EQ(tokens.at(0)->getType(), CreateDatabase);
+    EXPECT_EQ(tokens.at(0)->getValue().at(0), "emptySchema");
+
+    EXPECT_EQ(tokens.at(1)->getType(), End);
     //EXPECT_EQ(1, 1);
 }

@@ -2,13 +2,13 @@
 // Created by Daniel on 10/31/23.
 //
 
-#ifndef NEKODBMS_KEYWORDPRIMARY_H
-#define NEKODBMS_KEYWORDPRIMARY_H
+#ifndef NEKODBMS_KEYWORDINTEGER_H
+#define NEKODBMS_KEYWORDINTEGER_H
 
 
-#include "Abstract/ObserverKeyword.h"
+#include "../Abstract/ObserverKeyword.h"
 
-class KeywordPrimary : public ObserverKeyword {
+class KeywordInteger : public ObserverKeyword {
 private:
     Token *token;
 public:
@@ -18,4 +18,4 @@ public:
 };
 
 
-#endif //NEKODBMS_KEYWORDPRIMARY_H
+#endif //NEKODBMS_KEYWORDINTEGER_H

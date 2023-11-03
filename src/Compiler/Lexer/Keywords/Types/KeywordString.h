@@ -6,8 +6,8 @@
 #define NEKODBMS_KEYWORDSTRING_H
 
 
-#include "../../Token.h"
-#include "Abstract/ObserverKeyword.h"
+#include "../../../Token.h"
+#include "../Abstract/ObserverKeyword.h"
 
 class KeywordString : public ObserverKeyword {
 private:

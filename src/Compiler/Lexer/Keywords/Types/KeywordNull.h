@@ -2,14 +2,14 @@
 // Created by Daniel on 10/31/23.
 //
 
-#ifndef NEKODBMS_KEYWORDBOOLEAN_H
-#define NEKODBMS_KEYWORDBOOLEAN_H
+#ifndef NEKODBMS_KEYWORDNULL_H
+#define NEKODBMS_KEYWORDNULL_H
 
 
-#include "../../Token.h"
-#include "Abstract/ObserverKeyword.h"
+#include "../../../Token.h"
+#include "../Abstract/ObserverKeyword.h"
 
-class KeywordBoolean : public ObserverKeyword {
+class KeywordNull : public ObserverKeyword {
 private:
     Token *token;
 public:
@@ -19,4 +19,4 @@ public:
 };
 
 
-#endif //NEKODBMS_KEYWORDBOOLEAN_H
+#endif //NEKODBMS_KEYWORDNULL_H

@@ -6,7 +6,7 @@
 #define NEKODBMS_KEYWORDSCHEMA_H
 
 
-#include "Abstract/BasicKeyword.h"
+#include "../Abstract/BasicKeyword.h"
 
 class KeywordSchema : public BasicKeyword {
 public:
