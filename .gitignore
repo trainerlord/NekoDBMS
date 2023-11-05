@@ -4,6 +4,6 @@
 !/src
 !/CMakeLists.txt
 !/notepad.md
-!/example.dbms
+!/examples/example.dbms
 !/test
 !/.gitlab-ci.yml

@@ -8,7 +8,7 @@
 #include "../../src/Compiler/Paser.h"
 
 TEST(TestParser, TestFileToParsered) {
-    std::string file = SourceCodeGateway::readSourceFile("../example.dbms");
+    std::string file = SourceCodeGateway::readSourceFile("../examples/example.dbms");
     Lexer lex(file);
     Paser parse(lex.lexFile());
     ParsedSource src = parse.parse();

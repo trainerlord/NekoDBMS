@@ -7,7 +7,7 @@
 #include "../../src/Compiler/Lexer.h"
 
 TEST(TestLexer, TestFileToVector) {
-    std::string file = SourceCodeGateway::readSourceFile("../example.dbms");
+    std::string file = SourceCodeGateway::readSourceFile("../examples/example.dbms");
 
     std::vector<std::string> words = Lexer::textBlobToVector(file);
 
@@ -16,7 +16,7 @@ TEST(TestLexer, TestFileToVector) {
 }
 
 TEST(TestLexer, TestFileToTokens) {
-    std::string file = SourceCodeGateway::readSourceFile("../example.dbms");
+    std::string file = SourceCodeGateway::readSourceFile("../examples/example.dbms");
 
     Lexer lex(file);
 
