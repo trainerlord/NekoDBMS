@@ -1,0 +1,32 @@
+@Schema NekoSquare {
+    @Table Accounts {
+        @Primary @String email_address;
+	    @String password;
+    }
+    @Table Tokens {
+	    @Primary @Depends(Accounts.email_address, "fk_accounts") @String email_address;
+	    @String token;
+    }
+    /* Versions of .select
+    .select(Boolean condition, Integer limit);
+    .select(Boolean condition);
+    .select();
+    */
+    @Function getAccountByEmail(@String m_email_address): Accounts {
+        //returns all the rows in the table with the matching condition
+        @return Accounts.select(Accounts.email_address == m_email_address);
+    }
+
+    @Function getAllTokensAndAccount(): Accounts & Tokens {
+        //Assigns this joined table to a variable;
+        //checks that no variable is available in scope;
+
+        //join(<child_table>, <parent_column>, <child_column)>);
+        //Joins two columns together and returns the amalgamated column
+        @let tokenAccounts = Accounts.join(Tokens, Tokens.email_address, Accounts.email_address);
+
+        //returns all the rows in the table
+        @return tokenAccounts.select();
+    }
+}
+
