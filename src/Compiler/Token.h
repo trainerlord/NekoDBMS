@@ -12,6 +12,7 @@
 enum TokenType {
     CreateDatabase,
     CreateTable,
+    CreateFunction,
     SetPrimaryKey,
     SetForeignKey,
     SetNull,

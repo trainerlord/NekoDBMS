@@ -47,7 +47,9 @@ add_executable(NekoDBMS src/main.cpp
         src/Compiler/Lexer/Keywords/Operations/KeywordReturn.cpp
         src/Compiler/Lexer/Keywords/Operations/KeywordReturn.h
         src/Compiler/Lexer/Keywords/Operations/KeywordLet.cpp
-        src/Compiler/Lexer/Keywords/Operations/KeywordLet.h)
+        src/Compiler/Lexer/Keywords/Operations/KeywordLet.h
+        src/Compiler/Lexer/Keywords/Constructors/KeywordFunction.cpp
+        src/Compiler/Lexer/Keywords/Constructors/KeywordFunction.h)
 
 enable_testing()
 
@@ -97,7 +99,10 @@ add_executable(
         src/Compiler/Lexer/Keywords/Operations/KeywordReturn.h
         src/Compiler/Lexer/Keywords/Operations/KeywordLet.cpp
         src/Compiler/Lexer/Keywords/Operations/KeywordLet.h
-        test/Compiler/Lexer/Keywords/Operations/TestKeywordLet.cpp)
+        test/Compiler/Lexer/Keywords/Operations/TestKeywordLet.cpp
+        src/Compiler/Lexer/Keywords/Constructors/KeywordFunction.cpp
+        src/Compiler/Lexer/Keywords/Constructors/KeywordFunction.h
+        test/Compiler/Lexer/Keywords/Constructors/TestKeywordFunction.cpp)
 target_link_libraries(
         NekoDBMSTest
         GTest::gtest_main
