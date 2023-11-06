@@ -18,6 +18,7 @@ enum TokenType {
     String,
     Integer,
     Boolean,
+    Return,
     End,
 };
 

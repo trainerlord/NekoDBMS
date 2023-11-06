@@ -43,7 +43,9 @@ add_executable(NekoDBMS src/main.cpp
         src/Compiler/Lexer/Keywords/Types/KeywordNull.h
         src/Compiler/Lexer/Keywords/Abstract/Observer.cpp
         src/Compiler/Lexer/Keywords/Abstract/Observer.h
-        src/Compiler/Lexer/KeywordFactory.cpp src/Compiler/Lexer/KeywordFactory.h src/Compiler/Adapters/SchemaInstructions.h)
+        src/Compiler/Lexer/KeywordFactory.cpp src/Compiler/Lexer/KeywordFactory.h src/Compiler/Adapters/SchemaInstructions.h
+        src/Compiler/Lexer/Keywords/Operations/KeywordReturn.cpp
+        src/Compiler/Lexer/Keywords/Operations/KeywordReturn.h)
 
 enable_testing()
 
@@ -87,7 +89,10 @@ add_executable(
         src/Compiler/Lexer/Keywords/Types/KeywordNull.cpp
         src/Compiler/Lexer/Keywords/Types/KeywordNull.h
         src/Compiler/Lexer/Keywords/Abstract/Observer.cpp
-        src/Compiler/Lexer/Keywords/Abstract/Observer.h src/Compiler/Lexer/KeywordFactory.cpp src/Compiler/Lexer/KeywordFactory.h src/Compiler/Adapters/SchemaInstructions.h)
+        src/Compiler/Lexer/Keywords/Abstract/Observer.h src/Compiler/Lexer/KeywordFactory.cpp src/Compiler/Lexer/KeywordFactory.h src/Compiler/Adapters/SchemaInstructions.h
+        test/Compiler/Lexer/Keywords/Operations/TestKeywordReturn.cpp
+        src/Compiler/Lexer/Keywords/Operations/KeywordReturn.cpp
+        src/Compiler/Lexer/Keywords/Operations/KeywordReturn.h)
 target_link_libraries(
         NekoDBMSTest
         GTest::gtest_main

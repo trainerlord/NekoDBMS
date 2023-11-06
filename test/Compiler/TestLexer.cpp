@@ -12,7 +12,6 @@ TEST(TestLexer, TestFileToVector) {
     std::vector<std::string> words = Lexer::textBlobToVector(file);
 
     EXPECT_EQ(24, words.size());
-    return;
 }
 
 TEST(TestLexer, TestFileToTokens) {
