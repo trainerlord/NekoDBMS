@@ -19,6 +19,7 @@ enum TokenType {
     Integer,
     Boolean,
     Return,
+    Let,
     End,
 };
 
