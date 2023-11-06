@@ -3,7 +3,7 @@
 /.idea
 !/src
 !/CMakeLists.txt
-!/notepad.md
 !/examples
 !/test
 !/.gitlab-ci.yml
+!/README.md
