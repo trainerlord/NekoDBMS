@@ -1,4 +1,5 @@
 # NEKO DBMS
+![pipeline](https://gitlab.danielsworkbench.com/DanielB/database-builder-cli/badges/C++Migration/pipeline.svg)
 
 Neko DBMS (Database Management Script) is a simple compiler that takes NekoScript and complies it into PostgreSQL.
 
