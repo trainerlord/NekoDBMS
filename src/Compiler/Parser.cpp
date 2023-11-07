@@ -2,13 +2,13 @@
 // Created by Daniel on 10/26/23.
 //
 
-#include "Paser.h"
+#include "Parser.h"
 
-Paser::Paser(std::vector<Token *> tokens) {
+Parser::Parser(std::vector<Token *> tokens) {
     this->tokens = tokens;
 }
 
-ParsedSource Paser::parse() {
+ParsedSource Parser::parse() {
     std::string currentDatabase;
     std::string currentTable;
     int columnIndex = -1;
@@ -99,7 +99,7 @@ ParsedSource Paser::parse() {
     return src;
 }
 
-int Paser::getIndexOfDatabase(std::string db) {
+int Parser::getIndexOfDatabase(std::string db) {
     for (int index = 0; index < this->src.databases.size(); index++) {
         if (db == this->src.databases.at(index).name) {
             return index;
@@ -109,7 +109,7 @@ int Paser::getIndexOfDatabase(std::string db) {
     return -1;
 }
 
-int Paser::getIndexOfTable(std::string db, std::string table) {
+int Parser::getIndexOfTable(std::string db, std::string table) {
     int dbIndex = this->getIndexOfDatabase(db);
 
     for (int index = 0; index < this->src.databases.at(dbIndex).Tables.size(); index++) {
@@ -120,7 +120,7 @@ int Paser::getIndexOfTable(std::string db, std::string table) {
     return -1;
 }
 
-int Paser::getIndexOfColumn(std::string db, std::string table, std::string column) {
+int Parser::getIndexOfColumn(std::string db, std::string table, std::string column) {
     int dbIndex = this->getIndexOfDatabase(db);
     int tableIndex = this->getIndexOfTable(db, table);
 

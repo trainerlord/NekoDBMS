@@ -17,8 +17,8 @@ add_executable(NekoDBMS src/main.cpp
         src/Compiler/Token.cpp
         src/Gateways/SourceCodeGateway.h
         src/Gateways/SourceCodeGateway.cpp
-        src/Compiler/Paser.cpp
-        src/Compiler/Paser.h src/Compiler/Adapters/AbstractComplier.cpp src/Compiler/Adapters/AbstractComplier.h src/Compiler/Adapters/PostgreSQLComplier.cpp src/Compiler/Adapters/PostgreSQLComplier.h
+        src/Compiler/Parser.cpp
+        src/Compiler/Parser.h src/Compiler/Adapters/AbstractComplier.cpp src/Compiler/Adapters/AbstractComplier.h src/Compiler/Adapters/PostgreSQLComplier.cpp src/Compiler/Adapters/PostgreSQLComplier.h
         src/Compiler/Lexer/Keywords/Abstract/BasicKeyword.h
         src/Compiler/Lexer/Keywords/Abstract/ObserverKeyword.cpp
         src/Compiler/Lexer/Keywords/Abstract/ObserverKeyword.h
@@ -62,8 +62,8 @@ add_executable(
         src/Gateways/SourceCodeGateway.cpp
         test/Gateways/TestSourceCodeGateway.cpp
         test/Compiler/TestLexer.cpp
-        src/Compiler/Paser.cpp
-        src/Compiler/Paser.h
+        src/Compiler/Parser.cpp
+        src/Compiler/Parser.h
         src/Compiler/Adapters/PostgreSQLComplier.cpp
         src/Compiler/Adapters/PostgreSQLComplier.h
         src/Compiler/Adapters/AbstractComplier.cpp

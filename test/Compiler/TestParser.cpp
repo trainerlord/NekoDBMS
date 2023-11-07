@@ -5,12 +5,12 @@
 #include <gtest/gtest.h>
 #include "../../src/Compiler/Lexer.h"
 #include "../../src/Gateways/SourceCodeGateway.h"
-#include "../../src/Compiler/Paser.h"
+#include "../../src/Compiler/Parser.h"
 
 TEST(TestParser, TestFileToParsered) {
     std::string file = SourceCodeGateway::readSourceFile("../examples/example.dbms");
     Lexer lex(file);
-    Paser parse(lex.lexFile());
+    Parser parse(lex.lexFile());
     ParsedSource src = parse.parse();
     EXPECT_EQ(1, 1);
 }

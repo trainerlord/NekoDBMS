@@ -8,7 +8,7 @@
 
 #include <utility>
 
-#include "../Paser.h"
+#include "../Parser.h"
 #include "SchemaInstructions.h"
 
 class AbstractComplier {

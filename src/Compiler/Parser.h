@@ -2,8 +2,8 @@
 // Created by Daniel on 10/26/23.
 //
 
-#ifndef NEKODBMS_PASER_H
-#define NEKODBMS_PASER_H
+#ifndef NEKODBMS_PARSER_H
+#define NEKODBMS_PARSER_H
 
 
 #include <vector>
@@ -31,8 +31,6 @@ struct Column {
             {}
 };
 
-struct 
-
 struct Table {
     std::string name;
     std::vector<Column> columns = {};
@@ -58,7 +56,7 @@ struct ParsedSource {
 
 
 
-class Paser {
+class Parser {
     std::vector<Token *> tokens;
     ParsedSource src;
 
@@ -67,9 +65,9 @@ class Paser {
     int getIndexOfColumn(std::string db, std::string table, std::string column);
 
 public:
-    Paser(std::vector<Token *> tokens);
+    Parser(std::vector<Token *> tokens);
     ParsedSource parse();
 };
 
 
-#endif //NEKODBMS_PASER_H
+#endif //NEKODBMS_PARSER_H
