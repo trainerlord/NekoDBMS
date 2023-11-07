@@ -17,7 +17,10 @@ enum KeywordTypes {
     PrimaryKey,
     SchemaKey,
     StringKey,
-    TableKey
+    TableKey,
+    LetKey,
+    ReturnKey,
+    FunctionKey
 };
 
 class KeywordFactory {

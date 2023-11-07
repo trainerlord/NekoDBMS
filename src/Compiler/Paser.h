@@ -31,6 +31,8 @@ struct Column {
             {}
 };
 
+struct 
+
 struct Table {
     std::string name;
     std::vector<Column> columns = {};

@@ -11,6 +11,9 @@
 #include "Keywords/Constructors/KeywordSchema.h"
 #include "Keywords/Types/KeywordString.h"
 #include "Keywords/Constructors/KeywordTable.h"
+#include "Keywords/Operations/KeywordReturn.h"
+#include "Keywords/Operations/KeywordLet.h"
+#include "Keywords/Constructors/KeywordFunction.h"
 
 #include <map>
 #include <iostream>
@@ -33,6 +36,12 @@ BasicKeyword *KeywordFactory::createKeyword(KeywordTypes type) {
             return new KeywordString();
         case TableKey:
             return new KeywordTable();
+        case LetKey:
+            return new KeywordLet();
+        case ReturnKey:
+            return new KeywordReturn();
+        case FunctionKey:
+            return new KeywordFunction();
         default:
             return new KeywordEnd();
     }
@@ -49,6 +58,9 @@ KeywordTypes KeywordFactory::keyToType(std::string key) {
     keywords["@Boolean"] = BooleanKey;
     keywords["@Depends"] = DependsKey;
     keywords["@Null"] = NullKey;
+    keywords["@return"] = ReturnKey;
+    keywords["@let"] = LetKey;
+    keywords["@Function"] = FunctionKey;
     keywords["}"] = EndKey;
     keywords["{}"] = EndKey;
 
