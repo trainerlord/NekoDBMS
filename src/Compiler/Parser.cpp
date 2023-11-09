@@ -3,6 +3,7 @@
 //
 
 #include "Parser.h"
+#include <iostream>
 
 Parser::Parser(std::vector<Token *> tokens) {
     this->tokens = tokens;
@@ -11,7 +12,9 @@ Parser::Parser(std::vector<Token *> tokens) {
 ParsedSource Parser::parse() {
     std::string currentDatabase;
     std::string currentTable;
+    std::string currentFunction;
     int columnIndex = -1;
+    Database *db = nullptr;
 
     for (Token *token : this->tokens) {
 
@@ -85,6 +88,11 @@ ParsedSource Parser::parse() {
                         .type = BOOLEAN;
                 break;
             case End:
+                if (!currentFunction.empty()) {
+                    currentTable = "";
+                    break;
+                }
+
                 if (!currentTable.empty()) {
                     currentTable = "";
                     break;
@@ -93,6 +101,29 @@ ParsedSource Parser::parse() {
                 if (!currentDatabase.empty()) {
                     currentDatabase = "";
                 }
+                break;
+            case CreateFunction:
+                db = &this->src.databases.at(this->getIndexOfDatabase(currentDatabase));
+                currentFunction = token->getValue().at(0);
+
+                db->functions.emplace_back(currentFunction);
+                //Parse
+
+                db->functions.at(db->functions.size() - 1).returnType = token->getValue().at(2);
+
+                std::cout << token->getValue().at(1).substr( token->getValue().at(1).find(':') + 1, token->getValue().at(1).length() - token->getValue().at(1).find(':')) << std::endl;
+
+                db->functions.at(db->functions.size() - 1).parameter.insert({
+                        token->getValue().at(1).substr( token->getValue().at(1).find(':') + 1, token->getValue().at(1).length() - token->getValue().at(1).find(':')),
+                        token->getValue().at(1).substr(0,token->getValue().at(1).find(':'))});
+
+
+
+
+                break;
+            case Return:
+                break;
+            case Let:
                 break;
         }
     }
