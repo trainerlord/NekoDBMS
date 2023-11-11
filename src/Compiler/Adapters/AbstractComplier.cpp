@@ -16,6 +16,10 @@ SchemaInstructions AbstractComplier::getDBCreationCommands() {
             cmds.databases.at(db.name).tables.push_back(this->createTableCommand(db.name, table));
         }
 
+        for (const Functions& func : db.functions) {
+            cmds.databases.at(db.name).functions.push_back(this->createFunctionCommand(db.name, func));
+        }
+
     }
 
     return cmds;

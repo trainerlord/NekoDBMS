@@ -17,6 +17,7 @@ protected:
 
     virtual std::string createDBCommand(Database db) {return "";};
     virtual std::string createTableCommand(std::string parent, Table table) {return "";};
+    virtual std::string createFunctionCommand(std::string parent, Functions func) {return "";};
     virtual std::string getColumnType(Column col) {return "";};
 
 
