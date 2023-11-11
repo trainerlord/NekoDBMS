@@ -109,10 +109,11 @@ ParsedSource Parser::parse() {
                 db->functions.emplace_back(currentFunction);
                 //Parse
 
+                //set Return Type
                 db->functions.at(db->functions.size() - 1).returnType = token->getValue().at(2);
 
-                std::cout << token->getValue().at(1).substr( token->getValue().at(1).find(':') + 1, token->getValue().at(1).length() - token->getValue().at(1).find(':')) << std::endl;
-
+                //std::cout << token->getValue().at(1).substr( token->getValue().at(1).find(':') + 1, token->getValue().at(1).length() - token->getValue().at(1).find(':')) << std::endl;
+                //set Parameters
                 db->functions.at(db->functions.size() - 1).parameter.insert({
                         token->getValue().at(1).substr( token->getValue().at(1).find(':') + 1, token->getValue().at(1).length() - token->getValue().at(1).find(':')),
                         token->getValue().at(1).substr(0,token->getValue().at(1).find(':'))});
@@ -122,8 +123,12 @@ ParsedSource Parser::parse() {
 
                 break;
             case Return:
+                db = &this->src.databases.at(this->getIndexOfDatabase(currentDatabase));
+                db->functions.at(db->functions.size() - 1).returnValue = token->getValue().at(0);
                 break;
             case Let:
+                db = &this->src.databases.at(this->getIndexOfDatabase(currentDatabase));
+                db->functions.at(db->functions.size() - 1).variables.insert({token->getValue().at(0), token->getValue().at(1)});
                 break;
         }
     }

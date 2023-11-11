@@ -26,4 +26,7 @@ TEST(TestParser, TestFileNewFileToParsered) {
     EXPECT_FALSE(src.databases.at(0).functions.at(0).parameter.contains("@String"));
 
     EXPECT_EQ(src.databases.at(0).functions.at(0).parameter.at("m_email_address"), "@String");
+
+    EXPECT_EQ(src.databases.at(0).functions.at(0).variables.size(), 0);
+    EXPECT_EQ(src.databases.at(0).functions.at(1).variables.size(), 1);
 }
