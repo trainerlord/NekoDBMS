@@ -41,10 +41,24 @@ struct Table {
             {}
 };
 
+struct Functions {
+    std::string name;
+    //name, type
+    std::map<std::string, std::string> parameter = {};
+    //name, value
+    std::map<std::string, std::string> variables = {};
+
+    std::string returnType;
+    std::string returnValue;
+
+    explicit Functions(std::string name): name(name)
+    {}
+};
 
 struct Database {
     std::string name;
     std::vector<Table> Tables = {};
+    std::vector<Functions> functions = {};
 
     explicit Database(std::string name): name(name)
     {}

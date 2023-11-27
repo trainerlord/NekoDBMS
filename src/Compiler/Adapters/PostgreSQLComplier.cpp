@@ -72,3 +72,27 @@ std::string PostgreSQLComplier::createDBCommand(Database db)  {
     std::string cmd = std::format(R"(CREATE DATABASE "{0}";)", db.name);
     return cmd;
 }
+
+std::string PostgreSQLComplier::createFunctionCommand(std::string parent, Functions func) {
+
+    //func.name
+
+    //parse the map of params
+
+    //translate the return vaule
+
+    //Sub any vars with translated operations
+    
+    /*
+        CREATE PROCEDURE ${name}(${params})
+        LANGUAGE SQL
+        BEGIN ATOMIC
+          ${queryies}
+        END;`
+
+     */
+
+
+
+    return AbstractComplier::createFunctionCommand(parent, func);
+}

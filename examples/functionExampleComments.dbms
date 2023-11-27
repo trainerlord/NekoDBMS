@@ -12,7 +12,7 @@
     .select(Boolean condition);
     .select();
     */
-    @Function getAccountByEmail(@String m_email_address): Accounts {
+    @Function getAccountByEmail(@String: m_email_address): Accounts {
         //returns all the rows in the table with the matching condition
         @return Accounts.select(Accounts.email_address == m_email_address);
     }

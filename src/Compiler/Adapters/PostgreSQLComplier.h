@@ -13,6 +13,7 @@ protected:
     std::string createDBCommand(Database db) override;
     std::string createTableCommand(std::string parent, Table table) override;
     std::string getColumnType(Column col) override;
+    std::string createFunctionCommand(std::string parent, Functions func) override;
 
 
 public:
