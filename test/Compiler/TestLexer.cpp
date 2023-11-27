@@ -11,7 +11,7 @@ TEST(TestLexer, TestFileToVector) {
 
     std::vector<std::string> words = Lexer::textBlobToVector(file);
 
-    EXPECT_EQ(35, words.size());
+    EXPECT_EQ(37, words.size());
 
     for(std::string word : words)
     {
@@ -27,7 +27,7 @@ TEST(TestLexer, TestFileToTokens) {
     std::vector<Token *> tokens = lex.lexFile();
     EXPECT_EQ(13, tokens.size());
 
-    EXPECT_EQ(tokens.at(8)->toString(), "4:email_address,Accounts.email_address,\"fk_accounts\"");
+    EXPECT_EQ(tokens.at(8)->toString(), "SetForeignKey:email_address,Accounts.email_address,\"fk_accounts\"");
 
     for(Token *token : tokens)
     {
@@ -79,7 +79,7 @@ TEST(TestLexer, TestFuncFileToTokens) {
     Lexer lex(file);
 
     std::vector<Token *> tokens = lex.lexFile();
-    EXPECT_EQ(20, tokens.size());
+    EXPECT_EQ(24, tokens.size());
 
 
     for(Token *token : tokens)
@@ -96,7 +96,7 @@ TEST(TestLexer, TestFuncFileToWithCommentsTokens) {
     Lexer lex(file);
 
     std::vector<Token *> tokens = lex.lexFile();
-    EXPECT_EQ(20, tokens.size());
+    EXPECT_EQ(24, tokens.size());
 
 
     for(Token *token : tokens)

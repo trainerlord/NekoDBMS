@@ -11,7 +11,6 @@
 class KeywordLet : public BasicKeyword {
 public:
     Token *lex(int *currentWordIndex, std::vector<std::string> text) override;
-
 };
 
 #endif //NEKODBMS_KEYWORDLET_H

@@ -14,11 +14,13 @@
 #include "Keywords/Operations/KeywordReturn.h"
 #include "Keywords/Operations/KeywordLet.h"
 #include "Keywords/Constructors/KeywordFunction.h"
+#include "Keywords/Operations/OperationAssign.h"
+#include "Keywords/Operations/DataOperations.h"
 
 #include <map>
 #include <iostream>
 
-BasicKeyword *KeywordFactory::createKeyword(KeywordTypes type) {
+BasicKeyword *KeywordFactory::createKeyword(KeywordTypes type, int line) {
     switch (type) {
         case BooleanKey:
             return new KeywordBoolean();
@@ -42,12 +44,16 @@ BasicKeyword *KeywordFactory::createKeyword(KeywordTypes type) {
             return new KeywordReturn();
         case FunctionKey:
             return new KeywordFunction();
+        case AssignOperation:
+            return new OperationAssign();
+        case DataOperations:
+            return new class DataOperations();
         default:
             return new KeywordEnd();
     }
 }
 
-KeywordTypes KeywordFactory::keyToType(std::string key) {
+KeywordTypes KeywordFactory::keyToType(std::string key, int line) {
     std::map<std::string, KeywordTypes> keywords;
 
     keywords["@Schema"] = SchemaKey;
@@ -61,21 +67,23 @@ KeywordTypes KeywordFactory::keyToType(std::string key) {
     keywords["@return"] = ReturnKey;
     keywords["@let"] = LetKey;
     keywords["@Function"] = FunctionKey;
+
+    keywords["."] = DataOperations;
+
+    keywords["="] = AssignOperation;
     keywords["}"] = EndKey;
     keywords["{}"] = EndKey;
 
 
     std::string subKey = key.substr(0, key.find('('));
 
-    try {
+    if (keywords.contains(subKey)) {
         return keywords[subKey];
-    } catch (int myNum) {
-        std::cout << "Invild Keyword" << subKey << std::endl;
-        exit(0);
     }
+    throw new std::exception();
 }
 
-BasicKeyword *KeywordFactory::createKeyword(std::string type) {
-    KeywordTypes typeItem = KeywordFactory::keyToType(type);
-    return KeywordFactory::createKeyword(typeItem);
+BasicKeyword *KeywordFactory::createKeyword(std::string type, int line) {
+    KeywordTypes typeItem = KeywordFactory::keyToType(type, line);
+    return KeywordFactory::createKeyword(typeItem, line);
 }

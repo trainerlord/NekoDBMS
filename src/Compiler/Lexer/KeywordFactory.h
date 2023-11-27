@@ -20,14 +20,16 @@ enum KeywordTypes {
     TableKey,
     LetKey,
     ReturnKey,
-    FunctionKey
+    FunctionKey,
+    AssignOperation,
+    DataOperations
 };
 
 class KeywordFactory {
 public:
-    static BasicKeyword *createKeyword(KeywordTypes type);
-    static BasicKeyword *createKeyword(std::string type);
-    static KeywordTypes keyToType(std::string key);
+    static BasicKeyword *createKeyword(KeywordTypes type, int line);
+    static BasicKeyword *createKeyword(std::string type, int line);
+    static KeywordTypes keyToType(std::string key, int line);
 };
 
 

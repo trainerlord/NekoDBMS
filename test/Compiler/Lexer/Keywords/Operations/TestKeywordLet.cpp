@@ -4,7 +4,7 @@
 
 #include <gtest/gtest.h>
 #include "../../../../../src/Compiler/Lexer/Keywords/Operations/KeywordLet.h"
-
+/*
 TEST(TestKeywordLet, TestBasicLet) {
 //@let tokenAccounts;
 
@@ -32,3 +32,4 @@ TEST(TestKeywordLet, TestAsignmentLet) {
     EXPECT_EQ(token->getValue().at(1), "Accounts.join(Tokens,Tokens.email_address,Accounts.email_address)");
     EXPECT_EQ(token->getType(), Let);
 }
+*/

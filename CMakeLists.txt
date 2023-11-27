@@ -49,7 +49,15 @@ add_executable(NekoDBMS src/main.cpp
         src/Compiler/Lexer/Keywords/Operations/KeywordLet.cpp
         src/Compiler/Lexer/Keywords/Operations/KeywordLet.h
         src/Compiler/Lexer/Keywords/Constructors/KeywordFunction.cpp
-        src/Compiler/Lexer/Keywords/Constructors/KeywordFunction.h)
+        src/Compiler/Lexer/Keywords/Constructors/KeywordFunction.h
+        src/Compiler/Lexer/Keywords/Operations/OperationAssign.cpp
+        src/Compiler/Lexer/Keywords/Operations/OperationAssign.h
+        src/Compiler/Lexer/Keywords/Operations/DataOperations.cpp
+        src/Compiler/Lexer/Keywords/Operations/DataOperations.h
+        src/Compiler/Lexer/Keywords/Operations/DataOperations/OperationSelect.cpp
+        src/Compiler/Lexer/Keywords/Operations/DataOperations/OperationSelect.h
+        src/Compiler/Lexer/Keywords/Operations/DataOperations/OperationJoin.cpp
+        src/Compiler/Lexer/Keywords/Operations/DataOperations/OperationJoin.h)
 
 enable_testing()
 
@@ -102,7 +110,15 @@ add_executable(
         test/Compiler/Lexer/Keywords/Operations/TestKeywordLet.cpp
         src/Compiler/Lexer/Keywords/Constructors/KeywordFunction.cpp
         src/Compiler/Lexer/Keywords/Constructors/KeywordFunction.h
-        test/Compiler/Lexer/Keywords/Constructors/TestKeywordFunction.cpp)
+        test/Compiler/Lexer/Keywords/Constructors/TestKeywordFunction.cpp
+        src/Compiler/Lexer/Keywords/Operations/OperationAssign.cpp
+        src/Compiler/Lexer/Keywords/Operations/OperationAssign.h
+        src/Compiler/Lexer/Keywords/Operations/DataOperations.cpp
+        src/Compiler/Lexer/Keywords/Operations/DataOperations.h
+        src/Compiler/Lexer/Keywords/Operations/DataOperations/OperationSelect.cpp
+        src/Compiler/Lexer/Keywords/Operations/DataOperations/OperationSelect.h
+        src/Compiler/Lexer/Keywords/Operations/DataOperations/OperationJoin.cpp
+        src/Compiler/Lexer/Keywords/Operations/DataOperations/OperationJoin.h)
 target_link_libraries(
         NekoDBMSTest
         GTest::gtest_main

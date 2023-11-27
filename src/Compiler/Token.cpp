@@ -34,5 +34,5 @@ std::string Token::toString() {
 
     //result.pop_back();
 
-    return std::format("{0}:{1}", (int) this->type, result);
+    return std::format("{0}:{1}", TokenTypeString[this->getType()], result);
 }

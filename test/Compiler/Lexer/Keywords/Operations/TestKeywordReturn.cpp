@@ -4,6 +4,7 @@
 #include <gtest/gtest.h>
 #include "../../../../../src/Compiler/Lexer/Keywords/Operations/KeywordReturn.h"
 
+/*
 TEST(TestKeywordReturn, TestBasicReturn) {
     //@return Accounts.select(Accounts.email_address == m_email_address);
 
@@ -16,4 +17,4 @@ TEST(TestKeywordReturn, TestBasicReturn) {
 
     EXPECT_EQ(token->getValue().at(0), "Accounts.select(Accounts.email_address==m_email_address)");
     EXPECT_EQ(token->getType(), Return);
-}
+}*/

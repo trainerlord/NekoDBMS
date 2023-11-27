@@ -21,7 +21,28 @@ enum TokenType {
     Boolean,
     Return,
     Let,
+    Assign,
+    Select,
+    Join,
     End,
+};
+
+constexpr std::string TokenTypeString[] = {
+                "CreateDatabase",
+                "CreateTable",
+                "CreateFunction",
+                "SetPrimaryKey",
+                "SetForeignKey",
+                "SetNull",
+                "String",
+                "Integer",
+                "Boolean",
+                "Return",
+                "Let",
+                "Assign",
+                "Select",
+                "Join",
+                "End",
 };
 
 class Token {
